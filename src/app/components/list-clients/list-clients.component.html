@@ -1,0 +1,39 @@
+<app-progress-bar *ngIf="loading"></app-progress-bar>
+<div *ngIf="!loading" class="container">
+    <div class="title">
+        <h5>Listado de clientes</h5>
+        <button type="button" class="btn btn-primary" routerLink="/add">Agregar Cliente</button>
+    </div>
+    <table *ngIf="listClients.length > 0" class="table table-hover mt-2">
+        <thead>
+          <tr class="table-dark">
+            <th scope="col">Rut</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido paterno</th>
+            <th scope="col">Apellido materno</th>
+            <th scope="col">Password</th>
+            <th scope="col">Nivel</th>
+            <th scope="col">Correo</th>
+            <th scope="col">Teléfono</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of listClients" class="table-light">
+            <td>{{ item.rut }}</td>
+            <td>{{ item.first_name }}</td>
+            <td>{{ item.paternal_lastname }}</td>
+            <td>{{ item.maternal_lastname }}</td>
+            <td>{{ item.password }}</td>
+            <td>{{ item.level }}</td>
+            <td>{{ item.email }}</td>
+            <td>{{ item.mobile_number }}</td>
+            <td>
+                <button routerLink="/edit/{{ item.id }}" type="button" class="btn btn-success btn-sm">Editar</button>
+                <button  (click)="deleteClient(item.id!)" type="button" class="btn btn-secondary btn-sm ms-1">Borrar</button>
+            </td>
+          </tr>
+        </tbody>
+    </table>
+    <h5 *ngIf="listClients.length == 0">No hay clientes para mostrar</h5>
+</div>

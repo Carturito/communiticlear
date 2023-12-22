@@ -1,0 +1,55 @@
+<app-progress-bar *ngIf="loading"></app-progress-bar>
+<div *ngIf="!loading" class="row mt-2">
+    <div class="col-lg-4 offset-lg-4">
+        <div class="card border-primary mb-3" style="max-width: 25rem;">
+            <div class="card-header text-center">{{ operation }} Cliente</div>
+            <div class="card-body">
+                <form [formGroup]="form" (ngSubmit)="addClient()">
+                    <input formControlName="rut" type="text" class="form-control" placeholder="Ingrese rut">
+                    <span *ngIf="form.get('rut')?.hasError('required') && form.get('rut')?.touched">
+                        El campo rut es <strong>requerido</strong>
+                    </span>
+                    <span *ngIf="form.get('rut')?.hasError('pattern') && form.get('rut')?.touched">
+                        El campo rut es <strong>invalido</strong>
+                    </span>
+                    <input formControlName="first_name" type="text" class="form-control mt-2" placeholder="Ingrese nombre">
+                    <span *ngIf="form.get('first_name')?.hasError('required') && form.get('first_name')?.touched">
+                        El campo nombre es <strong>requerido</strong>
+                    </span>
+                    <input formControlName="paternal_lastname" type="text" class="form-control mt-2" placeholder="Ingrese apellido paterno">
+                    <span *ngIf="form.get('paternal_lastname')?.hasError('required') && form.get('paternal_lastname')?.touched">
+                        El campo apellido paterno es <strong>requerido</strong>
+                    </span>
+                    <input formControlName="maternal_lastname" type="text" class="form-control mt-2" placeholder="Ingrese apellido materno">
+                    <span *ngIf="form.get('maternal_lastname')?.hasError('required') && form.get('maternal_lastname')?.touched">
+                        El campo apellido materno es <strong>requerido</strong>
+                    </span>
+                    <select class="form-control form-select-sm mt-2" formControlName="level" id="level">
+                        <option value="" [selected]="true">Seleccionar nivel</option>
+                        <option *ngFor="let item of profiles" [value]="item.value">{{ item.key }}</option>
+                    </select>
+                    <span *ngIf="form.get('level')?.hasError('required') && form.get('level')?.touched">
+                        El campo nivel es <strong>requerido</strong>
+                    </span>
+                    <!-- <input *ngFor="let item of profiles" formControlName="level" type="number" class="form-control mt-2" placeholder="Ingrese nivel"> -->
+                    <input formControlName="email" type="text" class="form-control mt-2" placeholder="Ingrese correo">
+                    <span *ngIf="form.get('email')?.hasError('required') && form.get('email')?.touched">
+                        El campo correo es <strong>requerido</strong>
+                    </span>
+                    <input formControlName="mobile_number" type="text" class="form-control mt-2" placeholder="Ingrese teléfono">
+                    <span *ngIf="form.get('mobile_number')?.hasError('required') && form.get('mobile_number')?.touched">
+                        El campo teléfono es <strong>requerido</strong>
+                    </span>
+                    <div class="row mt-2 text-center">
+                        <div class="col-lg-6">
+                            <button routerLink="/list" type="button" class="btn btn-secondary">Volver</button>
+                        </div>
+                        <div class="col-lg-6">
+                            <button [disabled]="form.invalid" type="submit" class="btn btn-success">Aceptar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
